@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <h1>黑马31期</h1>
+    <script language="JavaScript">
+            var aa = function() {
+                //调用java本地代码
+                window.hm31.sayHello2Java('来自js的问候');
+            }
+
+            var bb = function() {
+                //所有图片地址的变量
+                var imageList = "";
+                //1. 找到标签为img的元素的集合
+                var imgs = document.getElementsByTagName("img");
+                //2. 遍历数组,为img元素添加点击事件
+                for (var i = 0; i < imgs.length; i++) {
+                    var img = imgs[i];
+                    imageList = imageList + img.src + ";";
+                    img.onclick = function() {
+                        //传递当前的src给java
+                        //bindJs:这个是java代码中定义的name
+                        //openImg:是桥梁类定义的方法
+                        window.hm31.passCurImgUrl(this.src);
+                        //打印点击img对象的src属性
+                        //alert(this.src);
+                    }
+                }
+                //传输所有的src给java,其中"bindJs"是在java中定义的
+                window.hm31.passAllImgUrl(imageList);
+                //alert(imageList);
+            }
+        </script>
+</head>
+
+<body onload="bb()">
+<button onclick="aa()">点击我,调用java本地代码里面的方法</button>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+<img src="http://192.168.20.25:8080/mn.jpg"/>
+
+</body>
+
+</html>
